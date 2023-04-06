@@ -1,4 +1,0 @@
-repository "DocentMaker@SSB@cloud"
-  path "/"
-    br "/main"
-    co "/main"
