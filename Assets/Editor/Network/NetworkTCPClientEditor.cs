@@ -9,11 +9,8 @@ public class NetworkTCPClientEditor : Editor
 {
     public KaonMaker.TCP.Client.KXRTCPClient kXRTCPClient;
 
-
     SerializedProperty msgString;
-
    
-
     private void OnEnable()
     {
         if (AssetDatabase.Contains(target))

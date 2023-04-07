@@ -70,14 +70,15 @@ namespace KaonMaker.TCP.Client
             }
         }
 
-        
+        /// <summary>
+        /// 메세지 전송
+        /// </summary>
         public void SendMeesageTest()
         {
             byte[] msg = Encoding.Default.GetBytes(msgTest); ;
             SyncSendMessage(msg);
         }
         
-
 
         private void OnApplicationQuit()
         {
