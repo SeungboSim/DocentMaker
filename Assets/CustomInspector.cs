@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using System;
-
+using UnityEngine.UI;
 
 [Serializable]
 public class DocentVideo
@@ -20,7 +20,7 @@ public class DocentVideo
 [Serializable]
 public class Test
 {
-    
+
 }
 
 public enum ObjectType
@@ -48,7 +48,7 @@ public class CustomInspector : MonoBehaviour
 {
     [HideInInspector] [SerializeField] ObjectType _objectType;
     [HideInInspector] [SerializeField] private DocentVideo _docentVideoInfo;
-    [HideInInspector] [SerializeField] private Test _testInfo;    
+    [HideInInspector] [SerializeField] private Test _testInfo;
 
     public GameObject emptyQuadObject;
     public GameObject emptyCanvas;
@@ -59,24 +59,25 @@ public class CustomInspector : MonoBehaviour
         GameObject docentCanvas = Instantiate(emptyCanvas);
         docentCanvas.gameObject.name = "DocentCanvas";
         docentCanvas.transform.parent = docentObject.transform;
-        GameObject docentVideoObject = Instantiate(emptyQuadObject);        
+        GameObject docentVideoObject = Instantiate(emptyQuadObject);
         docentVideoObject.gameObject.name = "DocentVideoObject";
         docentVideoObject.transform.parent = docentCanvas.transform;
         docentVideoObject.transform.localPosition = new Vector3(0, 0, 0);
         if (_docentVideoInfo.buttonOption != 0)
         {
             GameObject docentVideoButtonBox = new GameObject("DocentVideoButtonBox");
+            docentVideoButtonBox.AddComponent<HorizontalLayoutGroup>();
             docentVideoButtonBox.transform.parent = docentCanvas.transform;
-            //docentVideoButtonBox.AddComponent<HorizontalWrapMode>();
+
+            if ((_docentVideoInfo.buttonOption & EButtonOption.Stop) == EButtonOption.Stop)
+                Instantiate(_docentVideoInfo.stopButton).transform.parent = docentVideoButtonBox.transform;
+            if ((_docentVideoInfo.buttonOption & EButtonOption.Play) == EButtonOption.Play)
+                Instantiate(_docentVideoInfo.playButton).transform.parent = docentVideoButtonBox.transform;
+            if ((_docentVideoInfo.buttonOption & EButtonOption.Jump) == EButtonOption.Jump)
+                Instantiate(_docentVideoInfo.jumpButton).transform.parent = docentVideoButtonBox.transform;
+            if ((_docentVideoInfo.buttonOption & EButtonOption.Slider) == EButtonOption.Slider)
+                Instantiate(_docentVideoInfo.slider).transform.parent = docentVideoButtonBox.transform;
         }
-        if ((_docentVideoInfo.buttonOption & EButtonOption.Stop) == EButtonOption.Stop)
-            Instantiate(_docentVideoInfo.stopButton).transform.parent = docentCanvas.transform;
-        if ((_docentVideoInfo.buttonOption & EButtonOption.Play) == EButtonOption.Play)
-            Instantiate(_docentVideoInfo.playButton).transform.parent = docentCanvas.transform;
-        if ((_docentVideoInfo.buttonOption & EButtonOption.Jump) == EButtonOption.Jump)
-            Instantiate(_docentVideoInfo.jumpButton).transform.parent = docentCanvas.transform;
-        if ((_docentVideoInfo.buttonOption & EButtonOption.Slider) == EButtonOption.Slider)
-            Instantiate(_docentVideoInfo.slider).transform.parent = docentCanvas.transform;
 
         switch (_docentVideoInfo.pixelSize)
         {
@@ -84,14 +85,14 @@ public class CustomInspector : MonoBehaviour
                 {
                     docentVideoObject.transform.localScale = new Vector3(1600f, 900f, 1f);
                     break;
-                }                
+                }
             case PixelSize.b:
                 {
                     docentVideoObject.transform.localScale = new Vector3(2100f, 900f, 1f);
                     break;
                 }
-        }        
-        
+        }
+
         VideoPlayer videoPlayer = docentVideoObject.AddComponent<VideoPlayer>();
         videoPlayer.clip = _docentVideoInfo.docentVideoClip;
     }
