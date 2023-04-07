@@ -10,13 +10,13 @@ namespace KaonMaker.TCP
     public class KXRNetwork : MonoBehaviour
     {
         public Socket _socket = null;                    //소켓 통신을 위한 Socket 선언
-        private List<Socket> clientSockets = new List<Socket>(); // Client 소켓 리스트
+        public List<Socket> clientSockets = new List<Socket>(); // Client 소켓 리스트
         private AsyncCallback receiveHandler;                   // 비동기 수신 핸들러 
         private AsyncCallback sendHandler;                      // 비동기 송신 핸들러
         private AsyncCallback connectHandler;                   // 접속 핸들러
         private AsyncCallback disConnectHandler;                // 접속 종료 핸들러
 
-        private byte[] tempMsg;
+        public byte[] tempMsg;
         public byte[] get_msg
         {
             get
@@ -34,7 +34,6 @@ namespace KaonMaker.TCP
         public void handleClientConnectionRequest(IAsyncResult ar)
         {
             Socket sockClient = _socket.EndAccept(ar);
-            //get_msg("new client");
 
             handleConnectedSocketProvider(sockClient);
 
@@ -54,6 +53,7 @@ namespace KaonMaker.TCP
             string ip = ip_endPoint.Address.ToString();
             Debug.Log(ip);
             clientSockets.Add(c);
+            Debug.Log("접속 IP : " + c.ToString());
         }
         #endregion
 

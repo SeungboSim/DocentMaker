@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464b7e408cc0cb44eaccd2544500ac28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempMsg: 00
   iPAddress: 
   port: 9999
 --- !u!114 &1742343384
@@ -345,6 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b290d8f7840488a4384dbfc17c34ab4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempMsg: 
 --- !u!4 &1742343385
 Transform:
   m_ObjectHideFlags: 0

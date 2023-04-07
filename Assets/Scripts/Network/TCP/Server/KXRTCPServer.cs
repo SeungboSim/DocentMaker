@@ -74,15 +74,6 @@ namespace KaonMaker.TCP.Server
 
 
         #region Server Á¾·á
-        public void OnDisable()
-        {
-            if (SyncThread != null)
-            {
-                SyncThread.Abort();
-            }
-            SocketStop();
-        }
-
         private void OnApplicationQuit()
         {
             SocketStop();
