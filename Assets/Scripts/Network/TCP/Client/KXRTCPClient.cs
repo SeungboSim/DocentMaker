@@ -18,20 +18,6 @@ namespace KaonMaker.TCP.Client
         public string iPAddress = "";   //서버 IP 주소
         public int port = 9999;         //서버 포트
 
-        private byte[] tempMsg;
-        public byte[] get_msg
-        {
-            get
-            {
-                return this.tempMsg;
-            }
-            set
-            {
-                this.tempMsg = value;
-            }
-
-        }
-
         private Thread SyncThread; //Multi Threading을 위한 Thread 호출
 
 

@@ -19,8 +19,6 @@ namespace KaonMaker.TCP.Server
         private AsyncCallback connectHandler;                   // 접속 핸들러
         private AsyncCallback disConnectHandler;                // 접속 종료 핸들러
 
-        public byte[] tempMsg;   // 메세지 byte
-
         private Thread SyncThread; //Multi Threading을 위한 Thread 호출
 
         #region Event 등록
