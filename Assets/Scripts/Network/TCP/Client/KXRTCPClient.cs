@@ -20,6 +20,8 @@ namespace KaonMaker.TCP.Client
 
         private Thread SyncThread; //Multi Threading을 위한 Thread 호출
 
+        public string msgTest = "";
+
 
         public KXRTCPClient()
         {
@@ -66,6 +68,13 @@ namespace KaonMaker.TCP.Client
 
             }
         }
+
+        
+        public void SendMeesageTest()
+        {
+            SendMessage(msgTest);
+        }
+        
 
 
         private void OnApplicationQuit()

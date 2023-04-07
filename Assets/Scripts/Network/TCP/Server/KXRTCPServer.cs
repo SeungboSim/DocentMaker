@@ -10,7 +10,7 @@ using UnityEngine;
 namespace KaonMaker.TCP.Server
 {
 
-    public class KXRTCPServer : KXRNetwork
+    public  class KXRTCPServer : KXRNetwork
     {
         private Socket _serverSocket = null;                    //소켓 통신을 위한 Socket 선언
         
@@ -74,15 +74,6 @@ namespace KaonMaker.TCP.Server
 
 
         #region Server 종료
-        public void OnDisable()
-        {
-            if (SyncThread != null)
-            {
-                SyncThread.Abort();
-            }
-            SocketStop();
-        }
-
         private void OnApplicationQuit()
         {
             SocketStop();
