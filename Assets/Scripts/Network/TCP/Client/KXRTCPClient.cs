@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 using UnityEngine;
 
@@ -72,7 +73,8 @@ namespace KaonMaker.TCP.Client
         
         public void SendMeesageTest()
         {
-            SendMessage(msgTest);
+            byte[] msg = Encoding.Default.GetBytes(msgTest); ;
+            SyncSendMessage(msg);
         }
         
 
