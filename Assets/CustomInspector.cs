@@ -56,28 +56,12 @@ public class CustomInspector : MonoBehaviour
     public void CreateDocentVideo()
     {
         GameObject docentObject = new GameObject("DocentObject");
-        GameObject docentCanvas = Instantiate(emptyCanvas);
+        GameObject docentCanvas = Instantiate(emptyCanvas, docentObject.transform);
         docentCanvas.gameObject.name = "DocentCanvas";
-        docentCanvas.transform.parent = docentObject.transform;
         GameObject docentVideoObject = Instantiate(emptyQuadObject);
         docentVideoObject.gameObject.name = "DocentVideoObject";
         docentVideoObject.transform.parent = docentCanvas.transform;
         docentVideoObject.transform.localPosition = new Vector3(0, 0, 0);
-        if (_docentVideoInfo.buttonOption != 0)
-        {
-            GameObject docentVideoButtonBox = new GameObject("DocentVideoButtonBox");
-            docentVideoButtonBox.AddComponent<HorizontalLayoutGroup>();
-            docentVideoButtonBox.transform.parent = docentCanvas.transform;
-
-            if ((_docentVideoInfo.buttonOption & EButtonOption.Stop) == EButtonOption.Stop)
-                Instantiate(_docentVideoInfo.stopButton).transform.parent = docentVideoButtonBox.transform;
-            if ((_docentVideoInfo.buttonOption & EButtonOption.Play) == EButtonOption.Play)
-                Instantiate(_docentVideoInfo.playButton).transform.parent = docentVideoButtonBox.transform;
-            if ((_docentVideoInfo.buttonOption & EButtonOption.Jump) == EButtonOption.Jump)
-                Instantiate(_docentVideoInfo.jumpButton).transform.parent = docentVideoButtonBox.transform;
-            if ((_docentVideoInfo.buttonOption & EButtonOption.Slider) == EButtonOption.Slider)
-                Instantiate(_docentVideoInfo.slider).transform.parent = docentVideoButtonBox.transform;
-        }
 
         switch (_docentVideoInfo.pixelSize)
         {
@@ -95,5 +79,25 @@ public class CustomInspector : MonoBehaviour
 
         VideoPlayer videoPlayer = docentVideoObject.AddComponent<VideoPlayer>();
         videoPlayer.clip = _docentVideoInfo.docentVideoClip;
+
+        if (_docentVideoInfo.buttonOption != 0)
+        {
+            GameObject docentVideoButtonBox = new GameObject("DocentVideoButtonBox");
+            docentVideoButtonBox.AddComponent<HorizontalLayoutGroup>();
+            docentVideoButtonBox.transform.SetParent(docentCanvas.transform);
+            docentVideoButtonBox.transform.localScale = new Vector3(1f, 1f, 1f);
+            docentVideoButtonBox.GetComponent<RectTransform>().sizeDelta = new Vector2(docentVideoObject.transform.localScale.x, 100f);
+            docentVideoButtonBox.transform.localPosition = new Vector3(0, -490, 0);
+            docentVideoButtonBox.GetComponent<HorizontalLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
+
+            if ((_docentVideoInfo.buttonOption & EButtonOption.Stop) == EButtonOption.Stop)
+                Instantiate(_docentVideoInfo.stopButton, docentVideoButtonBox.transform).transform.localScale = new Vector3(1f, 1f, 1f); ;
+            if ((_docentVideoInfo.buttonOption & EButtonOption.Play) == EButtonOption.Play)
+                Instantiate(_docentVideoInfo.playButton, docentVideoButtonBox.transform).transform.localScale = new Vector3(1f, 1f, 1f); ;
+            if ((_docentVideoInfo.buttonOption & EButtonOption.Jump) == EButtonOption.Jump)
+                Instantiate(_docentVideoInfo.jumpButton, docentVideoButtonBox.transform).transform.localScale = new Vector3(1f, 1f, 1f); ;
+            if ((_docentVideoInfo.buttonOption & EButtonOption.Slider) == EButtonOption.Slider)
+                Instantiate(_docentVideoInfo.slider, docentVideoButtonBox.transform).transform.localScale = new Vector3(1f, 1f, 1f); ;
+        }
     }
 }
