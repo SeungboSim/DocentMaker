@@ -63,6 +63,21 @@ public class CustomInspector : MonoBehaviour
         docentVideoObject.gameObject.name = "DocentVideoObject";
         docentVideoObject.transform.parent = docentCanvas.transform;
         docentVideoObject.transform.localPosition = new Vector3(0, 0, 0);
+        if (_docentVideoInfo.buttonOption != 0)
+        {
+            GameObject docentVideoButtonBox = new GameObject("DocentVideoButtonBox");
+            docentVideoButtonBox.transform.parent = docentCanvas.transform;
+            //docentVideoButtonBox.AddComponent<HorizontalWrapMode>();
+        }
+        if ((_docentVideoInfo.buttonOption & EButtonOption.Stop) == EButtonOption.Stop)
+            Instantiate(_docentVideoInfo.stopButton).transform.parent = docentCanvas.transform;
+        if ((_docentVideoInfo.buttonOption & EButtonOption.Play) == EButtonOption.Play)
+            Instantiate(_docentVideoInfo.playButton).transform.parent = docentCanvas.transform;
+        if ((_docentVideoInfo.buttonOption & EButtonOption.Jump) == EButtonOption.Jump)
+            Instantiate(_docentVideoInfo.jumpButton).transform.parent = docentCanvas.transform;
+        if ((_docentVideoInfo.buttonOption & EButtonOption.Slider) == EButtonOption.Slider)
+            Instantiate(_docentVideoInfo.slider).transform.parent = docentCanvas.transform;
+
         switch (_docentVideoInfo.pixelSize)
         {
             case PixelSize.a:
