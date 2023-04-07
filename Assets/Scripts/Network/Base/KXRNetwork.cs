@@ -9,6 +9,8 @@ namespace KaonMaker.TCP
 {
     public class KXRNetwork : MonoBehaviour
     {
+        public NetEnum netEnum;
+
         public Socket _socket = null;                    //소켓 통신을 위한 Socket 선언
         public List<Socket> clientSockets = new List<Socket>(); // Client 소켓 리스트
         private AsyncCallback receiveHandler;                   // 비동기 수신 핸들러 
@@ -115,7 +117,7 @@ namespace KaonMaker.TCP
                 try
                 {
                     tempMsg = ao.buffer;
-                    SyncSendMessage(tempMsg);
+                    Debug.Log("메세지 : " + tempMsg);
                 }
                 catch (Exception e)
                 {
