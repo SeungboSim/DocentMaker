@@ -29,10 +29,16 @@ public class ObjectInspectorEditor : Editor
                     // DocentVideo는 클래스이므로 '_docentVideoInfo.name' 형태로 클래스 내부에 접근할 수 있습니다.
                     // 프로퍼티를 가져옴과 동시에 Inspector에 노출시켜 줍니다.
                     EditorGUILayout.PropertyField(serializedObject.FindProperty("_docentVideoInfo.docentVideoClip"));
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_docentVideoInfo.pixelSize"));
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_docentVideoInfo.buttonOption"));
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_docentVideoInfo.stopButton"));
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_docentVideoInfo.playButton"));
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_docentVideoInfo.jumpButton"));
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_docentVideoInfo.slider"));
 
                     CustomInspector customInspector = (CustomInspector)target;
                     GUILayout.FlexibleSpace(); // 고정된 여백을 넣습니다. ( 버튼이 가운데 오기 위함)
-                    
+                    EditorGUILayout.Space();
                     if (GUILayout.Button("오브젝트 생성"))
                     {
                         //버튼 누를시 해당 명령을 구현해줍니다.
