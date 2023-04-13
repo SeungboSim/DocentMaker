@@ -15,6 +15,8 @@ public class DocentVideo
     [SerializeField] public GameObject playButton;
     [SerializeField] public GameObject jumpButton;
     [SerializeField] public GameObject slider;
+    [SerializeField] public GameObject scriptBox;
+    [SerializeField] public RunTimeVideoData scripts;
 }
 
 [Serializable]
@@ -31,10 +33,11 @@ public enum ObjectType
 
 public enum EButtonOption
 {
-    Stop = 0x00000001,   // 0001
-    Play = 0x00000002,   // 0010
-    Jump = 0x00000004,   // 0100
-    Slider = 0x00000008,   // 1000
+    Stop = 0x00000001,   // 00001
+    Play = 0x00000002,   // 00010
+    Jump = 0x00000004,   // 00100
+    Slider = 0x00000008,   // 01000
+    Script = 0x00000010,   // 10000
 }
 public enum PixelSize
 {
@@ -47,8 +50,8 @@ public enum PixelSize
 public class CustomInspector : MonoBehaviour
 {
     [HideInInspector] [SerializeField] ObjectType _objectType;
-    [HideInInspector] [SerializeField] private DocentVideo _docentVideoInfo;
-    [HideInInspector] [SerializeField] private Test _testInfo;
+    [HideInInspector] [SerializeField] public DocentVideo _docentVideoInfo;
+    [HideInInspector] [SerializeField] public Test _testInfo;
 
     public GameObject emptyQuadObject;
     public GameObject emptyCanvas;
@@ -78,7 +81,8 @@ public class CustomInspector : MonoBehaviour
         }
 
         VideoPlayer videoPlayer = docentVideoObject.AddComponent<VideoPlayer>();
-        videoPlayer.clip = _docentVideoInfo.docentVideoClip;
+        videoPlayer.playOnAwake = false;
+        videoPlayer.clip = _docentVideoInfo.docentVideoClip;        
 
         if (_docentVideoInfo.buttonOption != 0)
         {
@@ -98,6 +102,13 @@ public class CustomInspector : MonoBehaviour
                 Instantiate(_docentVideoInfo.jumpButton, docentVideoButtonBox.transform).transform.localScale = new Vector3(1f, 1f, 1f); ;
             if ((_docentVideoInfo.buttonOption & EButtonOption.Slider) == EButtonOption.Slider)
                 Instantiate(_docentVideoInfo.slider, docentVideoButtonBox.transform).transform.localScale = new Vector3(1f, 1f, 1f); ;
+            if ((_docentVideoInfo.buttonOption & EButtonOption.Script) == EButtonOption.Script)
+            {
+                GameObject scriptBox = Instantiate(_docentVideoInfo.scriptBox, docentCanvas.transform);
+                scriptBox.transform.localScale = new Vector3(1f, 1f, 1f);
+                scriptBox.GetComponent<VideoScript>().runTimeVideoData = _docentVideoInfo.scripts;
+            }
+                
         }
     }
 }

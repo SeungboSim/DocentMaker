@@ -15,6 +15,7 @@ public class ObjectInspectorEditor : Editor
 
         // _objectType 필드를 가져옵니다.
         var objectType = (ObjectType)serializedObject.FindProperty("_objectType").intValue;
+
         // _objectType 필드를 Inspector에 노출 시켜줍니다.
         EditorGUILayout.PropertyField(serializedObject.FindProperty("_objectType"));
 
@@ -35,6 +36,11 @@ public class ObjectInspectorEditor : Editor
                     EditorGUILayout.PropertyField(serializedObject.FindProperty("_docentVideoInfo.playButton"));
                     EditorGUILayout.PropertyField(serializedObject.FindProperty("_docentVideoInfo.jumpButton"));
                     EditorGUILayout.PropertyField(serializedObject.FindProperty("_docentVideoInfo.slider"));
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_docentVideoInfo.scriptBox"));
+
+                    var eButtonOptions = (EButtonOption)serializedObject.FindProperty("_docentVideoInfo.buttonOption").intValue;
+                    if ((eButtonOptions & EButtonOption.Script) == EButtonOption.Script)
+                        EditorGUILayout.PropertyField(serializedObject.FindProperty("_docentVideoInfo.scripts"));
 
                     CustomInspector customInspector = (CustomInspector)target;
                     GUILayout.FlexibleSpace(); // 고정된 여백을 넣습니다. ( 버튼이 가운데 오기 위함)
