@@ -448,7 +448,7 @@ MonoBehaviour:
   _docentVideoInfo:
     docentVideoClip: {fileID: 32900000, guid: 80657e922af79a94ba6d76f7714f9aed, type: 3}
     pixelSize: 0
-    buttonOption: 0
+    buttonOption: -1
     stopButton: {fileID: 2805019153551855397, guid: 4662755e6302cea44acbc6329eb26554, type: 3}
     playButton: {fileID: 5417085851083527561, guid: 2d0d55aac5da1fc4f8452afb3e74ffd4, type: 3}
     jumpButton: {fileID: 4793704220251969371, guid: 044418ce08e747a41919363465a479a1, type: 3}
